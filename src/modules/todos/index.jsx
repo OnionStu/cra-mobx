@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Input, Checkbox, Icon, Button, Radio, List, Row, Col } from 'antd'
 
-// import style from './todos.less'
-// import styles from './index.module.less'
-import style from './todos.css'
+import style from './todos.module.less'
 
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
@@ -88,9 +86,6 @@ const TodoList = props => (
 class TodoListView extends Component {
   render() {
     const { todos } = this.props
-    console.log(style)
-    // console.log(styles)
-
     return (
       <div>
         <TodoList

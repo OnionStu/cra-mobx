@@ -6,7 +6,9 @@ export default class HomeStore {
   @observable count = 0
 
   @action
-  sayHi(name) {}
+  sayHi(name) {
+    console.log('Hi~%s', name)
+  }
 
   @action
   changeMsg(msg) {
