@@ -29,11 +29,12 @@ class Todos {
 
   @computed
   get showList() {
+    console.log('computed showList : %s', this.listType)
     switch (this.listType) {
       case listType.ALL:
-        return this.list
+        return this.list.slice()
       case listType.TODO:
-        return this.unfinishList
+        return this.todoList
       case listType.DONE:
         return this.finishList
       default:
@@ -43,25 +44,31 @@ class Todos {
 
   @computed
   get finishList() {
+    console.log('computed finishList')
     return this.list.filter(todo => todo.finished)
   }
 
   @computed
-  get unfinishList() {
+  get todoList() {
+    console.log('computed todoList')
     return this.list.filter(todo => !todo.finished)
   }
 
-  get unfinishCount() {
-    return this.unfinishList.length
+  @computed
+  get todosCount() {
+    console.log('computed todos count')
+    return this.todoList.length
   }
 
   @action
   addTodo(todo) {
+    console.log('add list')
     this.list.push(new Todo(todo))
   }
 
   @action
   delTodo(id) {
+    console.log('delete list')
     this.list = this.list.filter(todo => id !== todo.id)
   }
 
@@ -73,12 +80,14 @@ class Todos {
 
   @action
   changeListType(type) {
+    console.log('change type')
     this.listType = type
   }
 
   @action
   clearFinished() {
-    this.list = this.unfinishList
+    console.log('clearFinished')
+    this.list = this.todoList
   }
 
   @action

@@ -4,6 +4,18 @@ body {
   font-family: sans-serif;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
 .App {
   text-align: center;
 }
