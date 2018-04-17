@@ -1,8 +1,8 @@
 # 注意事项
 
-当 observer 需要组合其它装饰器或高阶组件时，请确保 observer 是最深处(第一个应用)的装饰器，否则它可能什么都不做。
+当 `observer` 需要组合其它装饰器或高阶组件时，请确保 `observer` 是最深处(第一个应用)的装饰器，否则它可能什么都不做。
 
-withRouter 要放在最外层
+`withRouter` 要放在最外层(...最好是), 原文意思是要放在 `connect` 外层, [查看原文](https://reacttraining.com/react-router/web/api/withRouter)
 
 ```js
 @withRouter
