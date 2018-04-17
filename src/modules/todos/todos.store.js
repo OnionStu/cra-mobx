@@ -108,9 +108,7 @@ class Todos {
     try {
       const resp = yield fetch('/mock/todos')
       console.log(resp)
-      runInAction(() => {
-        this.list = resp.map(item => new Todo(item))
-      })
+      this.list = resp.map(item => new Todo(item))
     } catch (error) {
       console.error('...。。。2....', error)
     }
