@@ -16,9 +16,10 @@ class Todo {
     if ('string' === typeof params) {
       this.msg = params
     } else if (!!params && 'object' === typeof params) {
-      params.msg && (this.msg = params.msg)
-      // 接口测试
-      params.description && (this.msg = params.description)
+      if (params.msg) {
+        this.msg = params.msg
+        this.finished = !!params.finished
+      }
     }
   }
 }
@@ -93,7 +94,7 @@ class Todos {
   @action
   async fetchList() {
     try {
-      const resp = await fetch('food?q=s')
+      const resp = await fetch('/api/food?q=s')
       console.log(resp)
       runInAction(() => {
         this.list = resp.map(item => new Todo(item))
@@ -105,7 +106,7 @@ class Todos {
 
   fetchOtherList = flow(function*() {
     try {
-      const resp = yield fetch('food?q=ra')
+      const resp = yield fetch('/mock/todos')
       console.log(resp)
       runInAction(() => {
         this.list = resp.map(item => new Todo(item))

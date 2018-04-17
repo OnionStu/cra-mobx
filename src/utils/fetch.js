@@ -1,4 +1,8 @@
 import axios from 'axios'
+import Mock from '../mock'
+
+// 模拟数据
+Mock(axios)
 
 // 请求数
 const reqNums = []
@@ -15,7 +19,7 @@ const hideLoading = () => {
 // axios 配置
 axios.defaults.timeout = 6000
 axios.defaults.showLoading = true
-axios.defaults.baseURL = '/api/'
+// axios.defaults.baseURL = '/api/'
 
 // request 拦截器
 axios.interceptors.request.use(
