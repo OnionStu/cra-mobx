@@ -1,17 +1,32 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import TodoList from './TodoList'
+import { getItem } from '../../utils'
 import './todos.module.less'
 
 @inject('todos')
 @observer
 class TodoListView extends Component {
+  componentWillMount() {
+    const {
+      match: { params },
+      todos
+    } = this.props
+    todos.changeListType(params.type)
+  }
+
+  componentDidMount() {
+    const todos = getItem('todos')
+    if (todos) {
+      this.props.todos.setTodos(todos)
+    }
+  }
+
   render() {
-    const { todos } = this.props
     return (
       <div className="todos-page">
         <TodoList
-          todos={todos}
+          todos={this.props.todos}
           fetchList={this.fetch}
           handleAdd={this.onAdd}
           handleClear={this.handleClear}
@@ -30,7 +45,9 @@ class TodoListView extends Component {
   }
 
   onTypeChange = event => {
-    this.props.todos.changeListType(event.target.value)
+    const type = event.target.value
+    this.props.history.push('/todos/' + type)
+    this.props.todos.changeListType(type)
   }
 
   handleItemCheck = (todo, checked) => {
@@ -46,7 +63,7 @@ class TodoListView extends Component {
   }
 
   fetch = () => {
-    this.props.todos.fetchList()
+    this.props.todos.fetchOtherList()
   }
 }
 

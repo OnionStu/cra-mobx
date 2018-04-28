@@ -6,7 +6,7 @@ export default axios => {
   mock.onGet('/mock/todos').reply(
     200,
     Mock.mock({
-      'data|10-100': [
+      'data|10-50': [
         {
           id: '@id',
           msg: '@string',

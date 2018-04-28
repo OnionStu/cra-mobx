@@ -27,9 +27,9 @@ const ListFooter = observer(props => {
           <Button type="default" onClick={props.handleClear}>
             Clear Finished
           </Button>
-          {/* <Button type="primary" onClick={props.fetchList}>
+          <Button type="primary" onClick={props.fetchList}>
             Fetch
-          </Button> */}
+          </Button>
         </ButtonGroup>
       </Col>
     </Row>

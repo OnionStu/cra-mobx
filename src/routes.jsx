@@ -10,7 +10,8 @@ export default (
   <Route>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/todos" component={Todos} />
+      <Route exact path="/todos" component={Todos} />
+      <Route exact path="/todos/:type" component={Todos} />
       <Route path="/test" component={TestDemo} />
       <Route component={NoMatch} />
     </Switch>

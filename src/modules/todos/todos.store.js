@@ -1,10 +1,22 @@
-import { observable, action, computed, runInAction, flow } from 'mobx'
+import { observable, action, computed, runInAction, flow, toJS } from 'mobx'
 import fetch from '../../utils/fetch'
+import { saveItem } from '../../utils'
 
 const listType = {
   ALL: 'all',
   TODO: 'todo',
   DONE: 'done'
+}
+
+const selectType = type => {
+  switch (type) {
+    case listType.ALL:
+    case listType.TODO:
+    case listType.DONE:
+      return type
+    default:
+      return listType.ALL
+  }
 }
 
 class Todo {
@@ -65,12 +77,14 @@ class Todos {
   addTodo(todo) {
     console.log('add list')
     this.list.push(new Todo(todo))
+    saveItem('todos', toJS(this.list))
   }
 
   @action
   delTodo(id) {
     console.log('delete list')
     this.list = this.list.filter(todo => id !== todo.id)
+    saveItem('todos', toJS(this.list))
   }
 
   @action
@@ -81,14 +95,20 @@ class Todos {
 
   @action
   changeListType(type) {
-    console.log('change type')
-    this.listType = type
+    console.log('change type: %s', type)
+    this.listType = selectType(type)
   }
 
   @action
   clearFinished() {
     console.log('clearFinished')
     this.list = this.todoList
+    saveItem('todos', toJS(this.list))
+  }
+
+  @action
+  setTodos(todos) {
+    this.list = todos.map(item => new Todo(item))
   }
 
   @action
